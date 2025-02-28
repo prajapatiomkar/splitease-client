@@ -1,13 +1,37 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { useLoginUserMutation } from "../services/api";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginUser, { data: user, isSuccess, isError, error }] =
+    useLoginUserMutation();
+  useLoginUserMutation();
+  const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  // console.log(isLoading, isError, error, " isLoading, isError, error");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    try {
+      await loginUser({ email, password }).unwrap();
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Login failed!");
+    }
   };
+
+  useEffect(() => {
+    if (isSuccess && user) {
+      toast.success("Login successful!");
+      navigate("/");
+    }
+
+    if (isError) {
+      toast.error("Login failed."); // have to add correct error
+    }
+  }, [isSuccess, isError, user, error, navigate]);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

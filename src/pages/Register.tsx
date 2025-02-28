@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { useRegisterUserMutation } from "../services/api";
 import { toast } from "react-toastify";
 
@@ -7,9 +7,12 @@ export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [registerUser, { isLoading, isError, error }] =
+  const [registerUser, { data: user, isSuccess, isLoading, isError, error }] =
     useRegisterUserMutation();
+  const navigate = useNavigate();
+
   console.log(isLoading, isError, error, " isLoading, isError, error");
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -19,6 +22,16 @@ export default function Register() {
       toast.error(error?.data?.message || "Registration failed!");
     }
   };
+
+  useEffect(() => {
+    if (isSuccess && user) {
+      navigate("/login");
+    }
+
+    if (isError) {
+      toast.error("Registration failed.");
+    }
+  }, [isSuccess, isError, user, error, navigate]);
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
