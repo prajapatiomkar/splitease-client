@@ -8,7 +8,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loginUser, { data: user, isSuccess, isError, error }] =
     useLoginUserMutation();
-  useLoginUserMutation();
   const navigate = useNavigate();
 
   // console.log(isLoading, isError, error, " isLoading, isError, error");
@@ -26,10 +25,6 @@ export default function Login() {
     if (isSuccess && user) {
       toast.success("Login successful!");
       navigate("/");
-    }
-
-    if (isError) {
-      toast.error("Login failed."); // have to add correct error
     }
   }, [isSuccess, isError, user, error, navigate]);
 
@@ -78,12 +73,12 @@ export default function Login() {
                 Password
               </label>
               <div className="text-sm">
-                <a
-                  href="#"
+                <Link
+                  to="/forgot"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </div>
             </div>
             <div className="mt-2">

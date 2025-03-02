@@ -10,7 +10,7 @@ export default function Home() {
       {user ? (
         // Authenticated User Home
         <>
-          <div className="text-5xl">Welcome, {user.name}!</div>
+          <div className="text-5xl">Welcome, {user.user.name}!</div>
           <div className="mt-5 text-xl">Manage your expenses easily.</div>
         </>
       ) : (

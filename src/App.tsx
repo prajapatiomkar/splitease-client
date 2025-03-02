@@ -8,6 +8,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useGetUserProfileQuery } from "./services/api";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Forgot from "./pages/ForgotPassword";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   const { data: user, isLoading } = useGetUserProfileQuery({});
@@ -31,6 +34,9 @@ function App() {
             path="register"
             element={user ? <Navigate to="/" /> : <Register />}
           />
+          <Route path="forgot" element={<Forgot />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
       </Routes>
     </>

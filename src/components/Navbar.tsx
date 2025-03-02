@@ -9,10 +9,9 @@ export default function Navbar() {
 
   return (
     <nav className="flex justify-between p-4">
-      <Link to="/">Logo</Link>
+      <Link to="/">SplitEase</Link>
       {user ? (
         <>
-          <span>Welcome, {user?.user.name}!</span>
           <Logout />
         </>
       ) : (
