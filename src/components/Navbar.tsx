@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import Logout from "./Logout";
 import { useGetUserProfileQuery } from "../services/api";
+import { Button } from "./ui/button";
 
 export default function Navbar() {
   const { data: user, isLoading } = useGetUserProfileQuery({});
@@ -18,12 +19,12 @@ export default function Navbar() {
         <ul className="flex gap-4">
           <li>
             <Link to="/login" className="link-button">
-              Login
+              <Button variant="link">Login</Button>
             </Link>
           </li>
           <li>
             <Link to="/register" className="link-button">
-              Register
+              <Button variant="link"> Register</Button>
             </Link>
           </li>
         </ul>

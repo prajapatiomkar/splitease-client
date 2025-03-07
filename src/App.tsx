@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Forgot from "./pages/ForgotPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const { data: user, isLoading } = useGetUserProfileQuery({});
@@ -24,7 +25,7 @@ function App() {
         <Route path="/" element={<Root />}>
           <Route index element={<Home />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="dashboard" element={<Home />} />
+            <Route path="dashboard" element={<Dashboard />} />
           </Route>
           <Route
             path="login"

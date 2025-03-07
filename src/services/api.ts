@@ -6,6 +6,7 @@ export const api = createApi({
     baseUrl: "http://localhost:3000/api",
     credentials: "include",
   }),
+  tagTypes: ["Groups"],
   endpoints: (builder) => ({
     registerUser: builder.mutation<
       { message: string },
@@ -50,6 +51,18 @@ export const api = createApi({
     getUserProfile: builder.query({
       query: () => "/user/profile",
     }),
+    createGroup: builder.mutation({
+      query: (userData) => ({
+        url: "/user/create-group",
+        method: "POST",
+        body: userData,
+      }),
+      invalidatesTags: ["Groups"],
+    }),
+    getGroups: builder.query({
+      query: () => "/user/get-group",
+      providesTags: ["Groups"],
+    }),
   }),
 });
 
@@ -60,4 +73,6 @@ export const {
   useGetUserProfileQuery,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useCreateGroupMutation,
+  useGetGroupsQuery,
 } = api;
