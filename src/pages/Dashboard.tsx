@@ -13,10 +13,17 @@ export default function Dashboard() {
       {data && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
           {data.map(
-            (group: { id: string; name: string; description: string }) => (
+            (
+              group: { _id: string; name: string; description: string },
+              index: number
+            ) => (
               <GroupCard
-                key={group.id}
-                data={{ name: group.name, description: group.description }}
+                key={group._id || index}
+                data={{
+                  name: group.name,
+                  description: group.description,
+                  _id: group._id,
+                }}
               />
             )
           )}

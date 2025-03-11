@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCreateGroupMutation, useGetUserProfileQuery } from "@/services/api";
+import { Plus } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -40,7 +41,9 @@ export function CreateGroupDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Create Group</Button>
+        <Button variant="outline">
+          Create Group <Plus />
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

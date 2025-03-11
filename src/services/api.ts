@@ -63,6 +63,14 @@ export const api = createApi({
       query: () => "/user/get-group",
       providesTags: ["Groups"],
     }),
+    deleteGroup: builder.mutation({
+      query: (userData) => ({
+        url: "/user/delete-group",
+        method: "DELETE",
+        body: userData,
+      }),
+      invalidatesTags: ["Groups"],
+    }),
   }),
 });
 
@@ -75,4 +83,5 @@ export const {
   useResetPasswordMutation,
   useCreateGroupMutation,
   useGetGroupsQuery,
+  useDeleteGroupMutation,
 } = api;
